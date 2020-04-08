@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ui/ResultPage.qml</file>
+        <file>ui/StartPage.qml</file>
+        <file>main.qml</file>
+    </qresource>
+</RCC>
