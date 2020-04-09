@@ -13,9 +13,8 @@ UrlNode::UrlNode(const QString &url)
 
 UrlNode::~UrlNode()
 {
-    //    emit finished();
     std::for_each(children.begin(), children.end(), [](UrlNode *el) { delete el; });
-    //    emit finished();
+    emit finished();
 }
 
 void UrlNode::startSearch(const QByteArray &text)
@@ -30,22 +29,20 @@ void UrlNode::startSearch(const QByteArray &text)
     }
     findData = searchData(text, data);
     QByteArrayList res = searchUrl(data);
+    res.removeAll(url.toUtf8());
     int gens = this->gen + 1;
     for (const auto &tmp : res)
     {
-        if (url != tmp)
-        {
-            UrlNode *node = new UrlNode(tmp);
-            node->gen = gens;
-            children.append(node);
-        }
+        UrlNode *node = new UrlNode(tmp);
+        node->gen = gens;
+        children.append(node);
     }
     isFind = true;
     emit continueSearch();
     return;
 }
 
-QByteArray UrlNode::downloadData(const QString &url)
+QByteArray UrlNode::downloadData(const QString &url) const
 {
     QEventLoop loop;
     QNetworkAccessManager nam;
@@ -80,7 +77,7 @@ QByteArrayList UrlNode::searchUrl(const QByteArray &data) const
     return list;
 }
 
-QByteArrayList UrlNode::searchData(const QByteArray &text, QByteArray &data)
+QByteArrayList UrlNode::searchData(const QByteArray &text, QByteArray &data) const
 {
     QByteArrayList list;
     int i = data.indexOf(text);

@@ -34,14 +34,15 @@ StartPage *UiController::getStartPage() const
 void UiController::receiveResponse(const QByteArrayList &list, const QByteArray &url)
 {
     ++countUrl;
-    resultPage->Res += "--------- from url: " + url + "\n";
+    QString res;
+    res = "--------- from url: " + url + "\n";
     if (list.isEmpty())
     {
-        resultPage->Res += " -- empty -- \n";
+        res += " -- empty -- \n";
     }
     else if (list.at(0) == "error")
     {
-        resultPage->Res += ">>> " + list.at(1) + "\n";
+        res += ">>> " + list.at(1) + "\n";
     }
     else
     {
@@ -50,33 +51,27 @@ void UiController::receiveResponse(const QByteArrayList &list, const QByteArray 
             ++countRes;
             tmp.replace('\n', "");
             tmp.replace("  ", "");
-            resultPage->Res += tmp + '\n';
+            res += tmp + '\n';
         }
     }
-    emit resultPage->resChanged();
+    resultPage->appendToResult(res);
 }
 
 void UiController::receiveEnded()
 {
-    resultPage->Res += "    --------- END SEARCH ------------\n";
-    QByteArray res =
+    QString res = "    --------- END SEARCH ------------\n";
+    res +=
         "searched " + QByteArray::number(countUrl) + " url with " + QByteArray::number(countRes) + " results";
-    resultPage->Res += res;
+    resultPage->appendToResult(res);
+    resultPage->setReady(false);
     countRes = 0;
     countUrl = 0;
-    resultPage->readySearch = false;
-    emit resultPage->readyChanged();
-    emit resultPage->resChanged();
 }
 
 void UiController::clearRes()
 {
-    resultPage->Res = "";
-
-    resultPage->readySearch = true;
-    emit resultPage->readyChanged();
-
-    emit resultPage->resChanged();
+    resultPage->setResult("");
+    resultPage->setReady(true);
 }
 
 void UiController::stopSearch()

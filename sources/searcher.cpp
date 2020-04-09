@@ -21,7 +21,7 @@ void Searcher::startSearch(const QString &text, const QString &url, const int &c
     if (!queuedList.isEmpty())
         return;
     stop = false;
-    this->check = 0;
+    this->checkStop = 0;
     this->deepSearch = deepSearch;
     this->textSearch = text.toUtf8();
     this->countThread = countThreads + 2;
@@ -81,8 +81,8 @@ void Searcher::searchProcess(UrlNode *node)
     }
     else
     {
-        ++check;
-        if (this->check == countThread - 2)
+        ++checkStop;
+        if (this->checkStop == countThread - 2)
         {
             endSearch();
             return;
@@ -93,8 +93,8 @@ void Searcher::searchProcess(UrlNode *node)
 void Searcher::endSearch()
 {
     emit endFindText();
-    threadsManager->clearThreads();
     queuedList.clear();
+    threadsManager->clearThreads();
     delete rootUrlNode;
 
     qDebug() << "end search";

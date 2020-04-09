@@ -25,9 +25,9 @@ public:
     void startSearch(const QByteArray& text);
 
 private:
-    QByteArray downloadData(const QString& url);
+    QByteArray downloadData(const QString& url) const;
     QByteArrayList searchUrl(const QByteArray& data) const;
-    QByteArrayList searchData(const QByteArray& text, QByteArray& data);
+    QByteArrayList searchData(const QByteArray& text, QByteArray& data) const;
 
 public slots:
     void process();

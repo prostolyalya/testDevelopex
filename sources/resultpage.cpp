@@ -10,30 +10,29 @@ void ResultPage::stop()
     emit stopSearch();
 }
 
-QString ResultPage::res()
+QString ResultPage::getResult()
 {
-    return Res;
+    return result;
 }
 
-void ResultPage::setRes(const QString &value)
+void ResultPage::setResult(const QString &value)
 {
-    Res = value;
+    result = value;
+}
+
+void ResultPage::appendToResult(const QString &value)
+{
+    result += value;
+    emit resChanged();
 }
 
 void ResultPage::setReady(const bool &val)
 {
     readySearch = val;
+    emit readyChanged();
 }
 
 bool ResultPage::getReady()
 {
     return readySearch;
-}
-
-QString ResultPage::resultRead()
-{
-    QString result = "";
-    for (const auto &tmp : result)
-        result.append(tmp);
-    return result;
 }

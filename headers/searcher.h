@@ -18,7 +18,7 @@ class Searcher : public QObject
     int countThread = 0;
     int deepSearch = 0;
     QQueue<UrlNode *> queuedList;
-    int check;
+    int checkStop;
 
 public:
     Searcher(QObject *parent = nullptr);

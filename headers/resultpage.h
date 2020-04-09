@@ -9,18 +9,19 @@ class ResultPage : public QObject
 public:
     ResultPage(QObject *parent = nullptr);
 
-    Q_PROPERTY(QString res READ res WRITE setRes NOTIFY resChanged)
+    Q_PROPERTY(QString res READ getResult WRITE setResult NOTIFY resChanged)
     Q_PROPERTY(bool ready READ getReady WRITE setReady NOTIFY readyChanged)
     Q_INVOKABLE void stop();
 
-    QString Res;
-    QString res();
-    QString resultRead();
-    bool readySearch = false;
-
-    void setRes(const QString &value);
+    QString getResult();
+    void setResult(const QString &value);
+    void appendToResult(const QString &value);
     void setReady(const bool &val);
     bool getReady();
+
+private:
+    QString result;
+    bool readySearch = false;
 
 signals:
     void resChanged();
