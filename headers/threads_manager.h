@@ -11,8 +11,6 @@ class ThreadsManager : public QObject
 {
     Q_OBJECT
 
-    QList<QThread *> threadsList;
-
 public:
     ThreadsManager(QObject *parent = nullptr);
     ~ThreadsManager();
@@ -21,6 +19,10 @@ public:
     int getThreadsListSize();
     void toThread(QObject *worker, QThread *thread);
     void clearThreads();
+
+private:
+    QList<QThread *> threadsList;
+
 public slots:
     void removeThread();
 

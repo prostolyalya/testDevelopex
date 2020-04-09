@@ -5,6 +5,11 @@ ResultPage::ResultPage(QObject *parent)
 {
 }
 
+ResultPage::ResultPage(const ResultPage &resPage)
+{
+    Q_UNUSED(resPage)
+}
+
 void ResultPage::stop()
 {
     emit stopSearch();

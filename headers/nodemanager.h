@@ -12,15 +12,16 @@ class NodeManager : public QObject
 {
     Q_OBJECT
 
-    UiController *uiController;
-    ThreadsManager *threadsManager;
-    Searcher *searcher;
-
 public:
     NodeManager(QObject *parent = nullptr);
     ~NodeManager();
 
     UiController *getUiController() const;
+
+private:
+    UiController *uiController;
+    ThreadsManager *threadsManager;
+    Searcher *searcher;
 };
 
 #endif // NODEMANAGER_H

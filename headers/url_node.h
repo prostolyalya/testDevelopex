@@ -12,6 +12,7 @@ class UrlNode : public QObject
 public:
     UrlNode(QObject* parent = nullptr);
     UrlNode(const QString& url);
+    UrlNode(const UrlNode& node);
     ~UrlNode();
 
     QList<QByteArray> findData;

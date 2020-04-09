@@ -1,7 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Controls 2.14
-import ResultPage 1.0
 
 Item {
     anchors.fill: parent

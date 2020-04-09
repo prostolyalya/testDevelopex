@@ -9,12 +9,6 @@ class UiController : public QObject
 {
     Q_OBJECT
 
-    StartPage *startPage;
-    ResultPage *resultPage;
-
-    int countRes = 0;
-    int countUrl = 0;
-
 public:
     UiController(QObject *parent = nullptr);
     UiController(const UiController &uiController);
@@ -22,6 +16,13 @@ public:
 
     StartPage *getStartPage() const;
     ResultPage *getResultPage() const;
+
+private:
+    StartPage *startPage;
+    ResultPage *resultPage;
+
+    int countRes = 0;
+    int countUrl = 0;
 
 public slots:
     void receiveResponse(const QByteArrayList &list, const QByteArray &url);

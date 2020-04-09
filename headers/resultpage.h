@@ -8,7 +8,7 @@ class ResultPage : public QObject
 
 public:
     ResultPage(QObject *parent = nullptr);
-
+    ResultPage(const ResultPage &resPage);
     Q_PROPERTY(QString res READ getResult WRITE setResult NOTIFY resChanged)
     Q_PROPERTY(bool ready READ getReady WRITE setReady NOTIFY readyChanged)
     Q_INVOKABLE void stop();

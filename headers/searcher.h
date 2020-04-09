@@ -11,6 +11,15 @@ class Searcher : public QObject
 {
     Q_OBJECT
 
+public:
+    Searcher(QObject *parent = nullptr);
+    ~Searcher();
+
+    void setThreadsManager(ThreadsManager *value);
+    void searchProcess(UrlNode *node);
+    void setStop(bool value);
+
+private:
     ThreadsManager *threadsManager;
     UrlNode *rootUrlNode;
 
@@ -19,15 +28,6 @@ class Searcher : public QObject
     int deepSearch = 0;
     QQueue<UrlNode *> queuedList;
     int checkStop;
-
-public:
-    Searcher(QObject *parent = nullptr);
-    ~Searcher();
-
-    void setThreadsManager(ThreadsManager *value);
-    void searchProcess(UrlNode *node);
-
-    void setStop(bool value);
 
 public slots:
     void startSearch(const QString &text, const QString &url, const int &countThreads, const int &deepSearch);

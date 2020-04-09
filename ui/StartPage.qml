@@ -2,19 +2,7 @@ import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Controls 2.14
 
-
 Item {
-    function checkValid() {
-        if(textSearch.text === "")
-            return 1;
-        if(textUrl.text === "")
-            return 2;
-        if(textCountThreads.text < 1 || textCountThreads.text > 32)
-            return 3;
-        if(textCountUrl.text < 1)
-            return 4;
-        return 0;
-    }
     anchors.fill: parent
     TextField {
         id: textUrl
@@ -124,5 +112,16 @@ Item {
             anchors.fill: parent
             onClicked: view.currentIndex = 1
         }
+    }
+    function checkValid() {
+        if(textSearch.text === "")
+            return 1;
+        if(textUrl.text === "")
+            return 2;
+        if(textCountThreads.text < 1 || textCountThreads.text > 32)
+            return 3;
+        if(textCountUrl.text < 1)
+            return 4;
+        return 0;
     }
 }

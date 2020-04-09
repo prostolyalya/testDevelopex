@@ -2,7 +2,6 @@ import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Controls 2.14
 import "ui"
-import StartPage 1.0
 
 Window {
     visible: true
@@ -14,7 +13,6 @@ Window {
         id: view
         currentIndex: 0
         anchors.fill: parent
-//        interactive: false
         Page {
 
             StartPage {

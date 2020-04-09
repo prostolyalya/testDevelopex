@@ -11,6 +11,11 @@ UrlNode::UrlNode(const QString &url)
     this->url = url;
 }
 
+UrlNode::UrlNode(const UrlNode &node)
+{
+    Q_UNUSED(node)
+}
+
 UrlNode::~UrlNode()
 {
     std::for_each(children.begin(), children.end(), [](UrlNode *el) { delete el; });
