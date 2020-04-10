@@ -68,7 +68,7 @@ void Searcher::searchProcess(UrlNode *node)
         return;
     }
     UrlNode *fromQueue = queuedList.dequeue();
-    if (fromQueue->gen <= deepSearch && !stop)
+    if (!stop)
     {
         QThread *thread = node->thread();
         threadsManager->toThread(fromQueue, thread);
@@ -80,20 +80,10 @@ void Searcher::searchProcess(UrlNode *node)
             fromQueue->startSearch(textSearch);
         }
     }
-    else
-    {
-        ++checkStop;
-        if (this->checkStop == countThread - 2)
-        {
-            endSearch();
-            return;
-        }
-    }
 }
 
 void Searcher::endSearch()
 {
-    qDebug() << queuedList.size();
     emit endFindText();
     queuedList.clear();
     delete rootUrlNode;
