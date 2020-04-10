@@ -36,7 +36,7 @@ void Searcher::queuedSearch()
     UrlNode *node = reinterpret_cast<UrlNode *>(QObject::sender());
     QByteArrayList res = node->findData;
     emit responseFindText(res, node->url.toUtf8());
-    if (node->gen <= deepSearch)
+    if (node->gen < deepSearch)
         for (const auto &tmpNode : node->children)
         {
             connect(tmpNode, &UrlNode::continueSearch, this, &Searcher::queuedSearch, Qt::QueuedConnection);
@@ -63,7 +63,8 @@ void Searcher::searchProcess(UrlNode *node)
 {
     if (queuedList.isEmpty())
     {
-        endSearch();
+        if (++checkStop == countThread - 2)
+            endSearch();
         return;
     }
     UrlNode *fromQueue = queuedList.dequeue();
@@ -92,10 +93,11 @@ void Searcher::searchProcess(UrlNode *node)
 
 void Searcher::endSearch()
 {
+    qDebug() << queuedList.size();
     emit endFindText();
     queuedList.clear();
-    threadsManager->clearThreads();
     delete rootUrlNode;
+    threadsManager->clearThreads();
 
     qDebug() << "end search";
 }

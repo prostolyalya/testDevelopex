@@ -49,9 +49,6 @@ void ThreadsManager::removeThread()
     QThread *remThread = reinterpret_cast<QThread *>(object);
     if (remThread)
     {
-        qDebug() << "remove thread";
         threadsList.removeOne(remThread);
     }
-    else
-        qDebug() << "ERROR\t[ThreadPool]:(removeThread) thread don't exist";
 }
