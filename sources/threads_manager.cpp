@@ -20,7 +20,6 @@ void ThreadsManager::addThread(QObject *worker)
     worker->moveToThread(thread);
     threadsList << thread;
     thread->start();
-    qDebug() << "start" << threadsList.size() << "thread";
     return;
 }
 
