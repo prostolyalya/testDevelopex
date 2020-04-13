@@ -61,7 +61,7 @@ void Searcher::setStop(bool value)
 
 void Searcher::searchProcess(UrlNode *node)
 {
-    if (queuedList.isEmpty())
+    if (queuedList.isEmpty() || stop)
     {
         if (++checkStop == countThread - 2)
             endSearch();
